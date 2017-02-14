@@ -1,0 +1,71 @@
+<html>
+<head>
+  <title>Welcome</title>
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="css/customcss.css" type="text/css">
+    <script  src="https://code.jquery.com/jquery-3.1.1.min.js"  crossorigin="anonymous"></script>
+  <head>
+
+    <body>
+      <div class="container">
+        <div class="row" id="row1" style="text-align:center">
+          <div class="col-md-12 col-xs-12 col-sm-12">
+            <h4>Enter Username</h4>
+            <form action="">
+           <input type="text" placeholder="Enter username" name="username" id="username" style="text-align:center">
+            </form>
+            <button id="b1">Submit</button>
+          </div>
+        </div>
+<div class="row" id="row2">
+<div class="col-md-12 col-xs-12 col-sm-12" style="text-align:center">
+  <img src="" id="user-image" height="200px" width="200px" />
+    <h2 id="errormessage"></h2>
+    <p id="user-name"></p>
+<p id="emailid"></p>
+    <p id="company"></p>
+    <p id="created"></p>
+    <p id="location"></p>
+    <p id="path"></p>
+<button><a href="index.html">Home</button>
+</div>
+</div>
+
+
+      </div>
+      <script>
+        $(document).ajaxStart(function(){
+          $("#user-image").attr("src","progress.gif");
+        }).ajaxStop(function(){
+          console.log("Ajax Stopped.")
+        }).ajaxSuccess(function(){
+          console.log("Ajax Success")
+        }).ajaxComplete(function(){
+          console.log("Ajax Completed")
+        })
+
+        $("#b1").on("click",function(){
+          var username = $("#username").val();
+          console.log(username);
+          $.ajax({
+            url:"https://api.github.com/users/"+username,
+            success: function(data){
+              console.log(data);
+              $("#user-image").attr("src",data.avatar_url);
+              $("#user-name").text("Username is : "+data.name);
+              $("#company").text("Company  is : "+data.company);
+              $("#emailid").text("Email-id id is : "+data.email);
+              $("#created").text("Created at : "+data.created_at);
+              $("#location").text("Location is : "+data.location);
+              $("#path").text("Url is : "+data.html_url);
+            },
+            error: function(){
+              $("#user-image").attr("src","error.jpg");
+              $("#errormessage").text("User not found");
+
+            }
+          })
+        })
+      </script>
+    </body>
+</html>

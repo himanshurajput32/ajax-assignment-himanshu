@@ -1,0 +1,15 @@
+#row1{
+  height: 20%;
+  background-color: #87968A;
+}
+body{
+  background-color: #C5E55D;
+}
+#row2{
+  height:80%;
+  background-color: #CCEFEF;
+}
+img{
+  border-radius: 50%;
+  outline: 10px;
+}
